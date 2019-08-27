@@ -13,7 +13,8 @@ class UserTableSeeder extends Seeder
     public function run()
     {
         $usr = new User;
-        $usr->name      = 'Kio Kusanagi';
+        $usr->username  = 'kio';
+        $usr->fullname  = 'Kio Kusanagi';
         $usr->email     = 'kiokusa@gmail.com';
         $usr->password  = bcrypt('admin');
         $usr->birthdate = '1980-08-20';
@@ -22,7 +23,8 @@ class UserTableSeeder extends Seeder
  		$usr->save();
 
  		User::create(array(
- 			'name'      => 'Iory Yagami',
+            'username'  => 'iory',
+ 			'fullname'  => 'Iory Yagami',
  			'email'     => 'ioryya@gmail.com',
  			'password'  => bcrypt('editor'),
  			'birthdate' => '1985-10-12',
@@ -30,6 +32,6 @@ class UserTableSeeder extends Seeder
  		));
 
  		// Factory
- 		factory(User::class, 100)->create();
+ 		factory(User::class, 10)->create();
     }
 }
