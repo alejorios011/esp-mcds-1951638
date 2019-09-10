@@ -26,7 +26,7 @@ Route::any('user/list', function() {
 // Enrutamiento a una vista
 Route::view('article/list', 'articleslist', ['articles' => App\Article::all()]);
 // Enrutamiento con Parámetro
-Route::get('user/{id}', function($id) {
+Route::get('user/show/{id}', function($id) {
 	$user = App\User::find($id);
 	return dd($user);
 });
@@ -35,3 +35,8 @@ Route::get('category/list', function() {
 	$categories = App\Category::all();
 	return dd($categories);
 })->name('categorias');
+
+/* - - - - - - - - - - - - - - - - - - - - - - */
+/* Users - - - - - - - - - - - - - - - - - - - */
+Route::resource('user', 'UserController');
+
