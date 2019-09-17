@@ -36,7 +36,22 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+       $user = new User;
+       $user->username  = $request->username;
+       $user->fullname  = $request->fullname;
+       $user->email     = $request->email;
+       $user->password  = bcrypt($request->password);
+       $user->birthdate = $request->birthdate;
+       $user->gender    = $request->gender;
+       if($request->hasFile('photo')) {
+            $file = time().'.'.$request->photo->extension();
+            $request->photo->move(public_path('imgs'), $file);
+            $user->photo = "imgs/".$file;
+       }
+       if($user->save()) {
+            return redirect('users')->with('message', 'El Usuario '.$user->username.' fue creado con exito!');
+       }
+
     }
 
     /**
@@ -47,7 +62,8 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        $user = User::find($id);
+        return view('users.show')->with('user', $user);
     }
 
     /**
@@ -58,7 +74,8 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = User::find($id);
+        return view('users.edit')->with('user', $user);
     }
 
     /**
@@ -70,7 +87,20 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $user = User::find($id);
+        $user->username  = $request->username;
+        $user->fullname  = $request->fullname;
+        $user->email     = $request->email;
+        $user->birthdate = $request->birthdate;
+        $user->gender    = $request->gender;
+        if($request->hasFile('photo')) {
+            $file = time().'.'.$request->photo->extension();
+            $request->photo->move(public_path('imgs'), $file);
+            $user->photo = "imgs/".$file;
+       }
+        if($user->save()) {
+            return redirect('users')->with('message', 'El Usuario '.$user->username.' fue editado con exito!');
+        }
     }
 
     /**

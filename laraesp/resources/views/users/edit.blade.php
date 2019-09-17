@@ -1,14 +1,14 @@
 @extends('layouts-custom.app')
 
-@section('title', 'Crear Usuario')
+@section('title', 'Editar Usuario')
 
 @section('content')
 	<section class="container mt-5">
 		<div class="row">
 			<div class="col-md-6 offset-md-3">
 				<h1> 
-					<i class="fa fa-plus"></i> 
-					Crear Usuario
+					<i class="fa fa-pencil"></i> 
+					Editar Usuario
 				</h1>
 				<hr>
 			  <ol class="breadcrumb">
@@ -16,31 +16,29 @@
 			    	<a href="{{ url('users') }}">Lista de Usuarios</a>
 			    </li>
 			    <li class="breadcrumb-item active">
-			    	Crear Usuario
+			    	Editar Usuario
 			    </li>
 			  </ol>
-				<form action="{{ url('users') }}" method="post" enctype="multipart/form-data">
+				<form action="{{ url('users/'.$user->id) }}" method="post" enctype="multipart/form-data">
 					@csrf
+					@method('PUT')
 					<div class="form-group">
-						<input type="text" class="form-control" name="username" placeholder="Nombre de Usuario" required>
+						<input type="text" class="form-control" name="username" placeholder="Nombre de Usuario" value="{{ $user->username }}" required>
 					</div>
 					<div class="form-group">
-						<input type="text" class="form-control" name="fullname" placeholder="Nombre y Apellidos" required>
+						<input type="text" class="form-control" name="fullname" placeholder="Nombre y Apellidos" value="{{ $user->fullname }}" required>
 					</div>
 					<div class="form-group">
-						<input type="email" class="form-control" name="email" placeholder="Correo Electrónico" required>
+						<input type="email" class="form-control" name="email" placeholder="Correo Electrónico" value="{{ $user->email }}" required>
 					</div>
 					<div class="form-group">
-						<input type="password" class="form-control" name="password" placeholder="Contraseña" required>
-					</div>
-					<div class="form-group">
-						<input type="date" class="form-control" name="birthdate" placeholder="Fecha Nacimiento" required>
+						<input type="date" class="form-control" name="birthdate" placeholder="Fecha Nacimiento" value="{{ $user->birthdate }}" required>
 					</div>
 					<div class="form-group">
 						<select name="gender" class="form-control">
 							<option value="">Seleccione Genero...</option>
-							<option value="Female">Femenino</option>
-							<option value="Male">Masculino</option>
+							<option value="Female" @if($user->gender == 'Female') selected @endif>Femenino</option>
+							<option value="Male" @if($user->gender == 'Male') selected @endif>Masculino</option>
 						</select>
 					</div>
 					<div class="form-group">
@@ -59,7 +57,7 @@
 					<div class="form-group">
 						<button class="btn btn-success btn-lg"> 
 							<i class="fa fa-save"></i>
-							Guardar
+							Editar
 						</button>
 						<button class="btn btn-light btn-lg" type="reset"> 
 							<i class="fa fa-trash"></i>

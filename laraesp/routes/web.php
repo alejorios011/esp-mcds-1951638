@@ -38,5 +38,5 @@ Route::get('category/list', function() {
 
 /* - - - - - - - - - - - - - - - - - - - - - - */
 /* Users - - - - - - - - - - - - - - - - - - - */
-Route::resource('user', 'UserController');
+Route::resource('users', 'UserController');
 
