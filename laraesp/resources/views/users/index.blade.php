@@ -16,9 +16,9 @@
 					Adicionar Usuario
 				</a>
 				<hr>
-				@if (session()->has('message'))
+				@if (session('message'))
 					<div class="alert alert-success alert-dismissible fade show">
-					  {{ session()->get('message') }}
+					  {{ session('message') }}
 					  <button type="button" class="close" data-dismiss="alert">
 					    <span aria-hidden="true">&times;</span>
 					  </button>
@@ -50,9 +50,13 @@
 									<a class="btn btn-light" href="{{ url('users/'.$user->id.'/edit') }}">
 										<i class="fa fa-pencil"></i>
 									</a>
-									<a class="btn btn-danger" href="">
-										<i class="fa fa-trash"></i>
-									</a>
+									<form action="{{ url('users/'.$user->id) }}" method="post" style="display: inline-block;">
+										@csrf
+										@method('delete')
+										<button type="button" class="btn btn-danger btn-destroy">
+											<i class="fa fa-trash"></i> 
+										</button>
+									</form>
 								</td>
 							</tr>
 						@endforeach

@@ -13,20 +13,30 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 	<script>
-		$(document).on("click", ".browse", function() {
-		  var file = $(this).parents().find(".file");
-		  file.trigger("click");
+		$(document).ready(function() {
+			$('body').on('click', '.btn-destroy', function(event) {
+				event.preventDefault();
+				if(confirm('Realmente desea eliminar este registro ?')) {
+					$(this).parent().submit();
+				}
+			});
 		});
-		$('input[type="file"]').change(function(e) {
-		  var fileName = e.target.files[0].name;
-		  $("#file").val(fileName);
+	</script>
+	<script>
+		// $(document).on("click", ".browse", function() {
+		//   var file = $(this).parents().find(".file");
+		//   file.trigger("click");
+		// });
+		// $('input[type="file"]').change(function(e) {
+		//   var fileName = e.target.files[0].name;
+		//   $("#file").val(fileName);
 
-		  var reader = new FileReader();
-		  reader.onload = function(e) {
-		    document.getElementById("preview").src = e.target.result;
-		  };
-		  reader.readAsDataURL(this.files[0]);
-		});
+		//   var reader = new FileReader();
+		//   reader.onload = function(e) {
+		//     document.getElementById("preview").src = e.target.result;
+		//   };
+		//   reader.readAsDataURL(this.files[0]);
+		// });
 	</script>
 </body>
 </html>
